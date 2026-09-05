@@ -1,9 +1,17 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { proposeWithAI, aiStatus } from "../src/lib/ai";
+import { proposeWithAI, aiStatus, aiFailureReason } from "../src/lib/ai";
 import { demoDataset } from "../src/lib/dataset";
 
 afterEach(() => { vi.unstubAllEnvs(); vi.unstubAllGlobals(); });
 describe("Gemini planner", () => {
+  it("reports quota failures without exposing the provider body or secret", async () => {
+    vi.stubEnv("AI_PROVIDER", "gemini"); vi.stubEnv("GOOGLE_API_KEY", "test-secret");
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(Response.json({ error: { message: "test-secret" } }, { status: 429 })));
+    const error = await proposeWithAI(demoDataset(42)[0]).catch(error => error);
+    expect(aiFailureReason(error)).toContain("quota");
+    expect(aiFailureReason(error)).not.toContain("test-secret");
+    expect(aiFailureReason(new Error("test-secret"))).not.toContain("test-secret");
+  });
   it("reports missing credentials without a network request", async () => {
     vi.stubEnv("AI_PROVIDER", "gemini"); vi.stubEnv("GOOGLE_API_KEY", ""); vi.stubEnv("GEMINI_API_KEY", "");
     expect((await aiStatus()).available).toBe(false);

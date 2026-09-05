@@ -333,6 +333,7 @@ export default function Dashboard() {
         </footer>
       </aside>
       <main>
+        {run?.integrations?.ollama.fallbackReasons?.map(reason => <div key={reason} role="status" style={{ padding: 16, color: "#92400e", background: "#fffbeb" }}>{reason}</div>)}
         {error && <div role="alert" style={{ padding: 16, color: "#b42318" }}>{error}. Use Run recovery to retry.</div>}
         <header>
           <div>

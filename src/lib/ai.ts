@@ -5,6 +5,13 @@ const apiKey = () => process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 export const aiProvider = () => process.env.AI_PROVIDER || (apiKey() ? "gemini" : "ollama");
 export const geminiModel = () => process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
+export class AIError extends Error {}
+export function aiFailureReason(error: unknown) {
+  if (error instanceof AIError) return error.message;
+  if (error instanceof Error && ["TimeoutError", "AbortError"].includes(error.name)) return "AI request timed out. Try again.";
+  return "AI request failed before a validated decision was available.";
+}
+
 export async function aiStatus() {
   if (aiProvider() === "ollama") return { ...await ollamaStatus(), provider: "ollama" };
   return { available: Boolean(apiKey()), model: Boolean(apiKey()), modelName: geminiModel(), provider: "gemini", configurationOnly: true };
@@ -13,7 +20,7 @@ export async function aiStatus() {
 export async function proposeWithAI(context: AgentCaseContext): Promise<Decision> {
   if (aiProvider() === "ollama") return proposeWithOllama(context);
   const key = apiKey();
-  if (!key) throw new Error("Gemini API key is not configured");
+  if (!key) throw new AIError("Gemini API key is not configured in Render.");
   const started = Date.now();
   // Explicit projection keeps evaluator ground truth and customer identity off the wire.
   const evidence = { id: context.id, type: context.type, amountMinor: context.amountMinor, evidence: context.evidence.map((text, i) => ({ id: `${context.id}-E${i + 1}`, text })), flags: context.flags, eligibleActions: context.eligibleActions };
@@ -28,12 +35,21 @@ export async function proposeWithAI(context: AgentCaseContext): Promise<Decision
         generationConfig: { temperature: 0, maxOutputTokens: 2048, responseMimeType: "application/json", responseJsonSchema: {
           type: "object", properties: {
             diagnosisCode: { type: "string" }, confidenceBps: { type: "integer", minimum: 0, maximum: 10000 },
-            evidenceIds: { type: "array", items: { type: "string" } }, action: { type: "string", enum: context.eligibleActions }, rationale: { type: "string" },
+            evidenceIds: { type: "array", minItems: 1, items: { type: "string", enum: context.evidence.map((_, i) => `${context.id}-E${i + 1}`) } }, action: { type: "string", enum: context.eligibleActions }, rationale: { type: "string", maxLength: 500 },
           }, required: ["diagnosisCode", "confidenceBps", "evidenceIds", "action", "rationale"], additionalProperties: false,
         } },
       }),
     });
-    if (!response.ok) throw new Error(`Gemini request failed (${response.status})`);
+    if (!response.ok) {
+      const hints: Record<number, string> = {
+        400: "Gemini rejected the API key or request configuration.",
+        401: "Gemini API key authentication failed.",
+        403: "Gemini access denied. Check API key restrictions and project permissions.",
+        404: "Gemini model is unavailable. Check GEMINI_MODEL for this account.",
+        429: "Gemini quota or rate limit reached. Check this project's model quota in Google AI Studio.",
+      };
+      throw new AIError(`${hints[response.status] || "Gemini service request failed."} (HTTP ${response.status})`);
+    }
     const data = await response.json();
     try {
       const candidate = data.candidates?.[0];
@@ -43,6 +59,6 @@ export async function proposeWithAI(context: AgentCaseContext): Promise<Decision
       return { ...parsed, model: geminiModel(), promptVersion: "gemini-decision-v1", latencyMs: Date.now() - started, parseStatus: attempt ? "REPAIRED" : "VALID", fallback: false };
     } catch { /* One bounded retry, then the caller records deterministic fallback. */ }
   }
-  throw new Error("Gemini returned an invalid decision");
+  throw new AIError("Gemini returned an invalid decision after two attempts.");
 }
 

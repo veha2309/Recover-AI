@@ -188,6 +188,7 @@ export interface RunSnapshot {
       available: boolean;
       liveDecisions: number;
       fallbackDecisions: number;
+      fallbackReasons?: string[];
       model: string;
     };
     razorpay: {

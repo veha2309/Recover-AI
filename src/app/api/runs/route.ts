@@ -6,7 +6,7 @@ import {
   policy,
   ToolExecution,
 } from "@/lib/engine";
-import { aiStatus, proposeWithAI } from "@/lib/ai";
+import { aiStatus, proposeWithAI, aiFailureReason } from "@/lib/ai";
 import { createRazorpayTestLink } from "@/lib/razorpay";
 import { repository } from "@/lib/store";
 export const runtime = "nodejs";
@@ -26,6 +26,8 @@ export async function POST(request: Request) {
   const status = await aiStatus();
   const cases = demoDataset(parsed.data.seed);
   const decisions = new Map<string, Decision>();
+  const failures = new Set<string>();
+  if (!status.available || !status.model) failures.add("AI provider is not configured or available.");
   if (status.available && status.model) {
     const liveCases = cases.slice(0, 4);
     let cursor = 0;
@@ -34,8 +36,8 @@ export async function POST(request: Request) {
         const item = liveCases[cursor++];
         try {
           decisions.set(item.id, await proposeWithAI(item));
-        } catch {
-          /* deterministic per-case fallback */
+        } catch (error) {
+          failures.add(aiFailureReason(error));
         }
       }
     });
@@ -77,6 +79,10 @@ export async function POST(request: Request) {
     tools,
     razorpayConfigured,
   );
+  if (run.integrations) {
+    run.integrations.ollama.model = status.modelName;
+    run.integrations.ollama.fallbackReasons = [...failures];
+  }
   repository.save(run);
   return Response.json(run, { status: 201 });
 }
