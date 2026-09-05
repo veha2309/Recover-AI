@@ -1,0 +1,2 @@
+import fs from "node:fs";import path from "node:path";import {expect,it} from "vitest";import {generateData} from "./generate-data";
+it("generates versioned dataset splits",()=>{const root=generateData();for(const [name,count] of [["demo",20],["development",80],["held-out",40]] as const){const data=JSON.parse(fs.readFileSync(path.join(root,`${name}.json`),"utf8"));expect(data.cases).toHaveLength(count)}console.log("Generated demo (20), development (80), and held-out (40) datasets.")});

@@ -1,0 +1,55 @@
+.integration-proof {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0;
+}
+.integration-proof > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 13px;
+}
+.integration-proof > div > span {
+  width: 34px;
+  height: 28px;
+  border-radius: 7px;
+  background: #eef0f4;
+  color: #7c8494;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  font-weight: 900;
+}
+.integration-proof > div > span.proof-on {
+  background: #e5f8f0;
+  color: #087854;
+}
+.integration-proof p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.integration-proof b {
+  font-size: 10px;
+}
+.integration-proof small {
+  font-size: 8px;
+  color: #858d9d;
+  margin-top: 3px;
+}
+.integration-proof a {
+  margin-left: auto;
+  color: #654be0;
+  font-size: 9px;
+  font-weight: 700;
+  text-decoration: none;
+}
+@media (max-width: 650px) {
+  .integration-proof {
+    grid-template-columns: 1fr;
+  }
+}

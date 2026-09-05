@@ -1,0 +1,2 @@
+import fs from "node:fs";import path from "node:path";import {demoDataset,generatedDataset} from "../src/lib/dataset";
+export function generateData(){const root=path.join(process.cwd(),"data","generated");fs.mkdirSync(root,{recursive:true});for(const [name,data] of [["demo",demoDataset()],["development",generatedDataset(80,3107)],["held-out",generatedDataset(40,9917)]] as const){fs.writeFileSync(path.join(root,`${name}.json`),JSON.stringify({version:"recoverai-dataset-v1",name,cases:data},null,2))}return root}

@@ -1,0 +1,39 @@
+.cohort-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+.cohort-strip > div {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 14px;
+}
+.cohort-strip small {
+  font-size: 8px;
+  color: #8a91a0;
+  letter-spacing: 0.7px;
+}
+.cohort-strip b {
+  font-size: 12px;
+  margin: 7px 0;
+}
+.cohort-strip span {
+  font-size: 8px;
+  color: #788092;
+}
+.cohort-strip .integrity-ok {
+  background: #effaf5;
+  border-color: #c9eddd;
+}
+.cohort-strip .integrity-ok b {
+  color: #087854;
+}
+@media (max-width: 800px) {
+  .cohort-strip {
+    grid-template-columns: 1fr;
+  }
+}

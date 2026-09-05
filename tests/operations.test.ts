@@ -1,0 +1,10 @@
+import {beforeAll,describe,expect,it,vi} from "vitest";import path from "node:path";import crypto from "node:crypto";
+vi.mock("server-only",()=>({}));
+let ops:typeof import("../src/lib/operations"),store:typeof import("../src/lib/store"),engine:typeof import("../src/lib/engine");
+beforeAll(async()=>{process.env.RECOVERAI_DB=path.join(process.cwd(),"data",`operations-test-${process.pid}-${Date.now()}.sqlite`);store=await import("../src/lib/store");ops=await import("../src/lib/operations");engine=await import("../src/lib/engine");store.repository.save(engine.createDemoRun());});
+describe("Phase Three operations",()=>{
+ it("bootstraps durable approvals and scheduled work",()=>{const snapshot=ops.bootstrapOperations();expect(snapshot.pendingApprovals).toBeGreaterThan(0);expect(snapshot.scheduledJobs).toBeGreaterThan(0)});
+ it("uses optimistic approval versions",()=>{const approval=ops.operationsSnapshot().approvals.find(a=>a.status==="PENDING")!;const updated=ops.decideApproval(approval.id,{decision:"APPROVED",expectedVersion:approval.version,reviewerNote:"Evidence reviewed"});expect(updated.approvals.find(a=>a.id===approval.id)?.status).toBe("APPROVED");expect(()=>ops.decideApproval(approval.id,{decision:"REJECTED",expectedVersion:approval.version,reviewerNote:"stale"})).toThrow()});
+ it("rejects invalid signatures and credits a valid provider event once",()=>{const secret="local-test-secret",fixture=ops.webhookFixture(`evt_${Date.now()}`),raw=JSON.stringify(fixture);expect(()=>ops.ingestRazorpayWebhook(raw,"bad",secret)).toThrow();const signature=crypto.createHmac("sha256",secret).update(raw).digest("hex");const first=ops.ingestRazorpayWebhook(raw,signature,secret),duplicate=ops.ingestRazorpayWebhook(raw,signature,secret);expect(first.credited).toBe(true);expect(duplicate.duplicate).toBe(true);expect(duplicate.credited).toBe(false)});
+ it("runs due jobs idempotently",()=>{const first=ops.runDueJobs("2030-01-01T00:00:00.000Z"),second=ops.runDueJobs("2030-01-01T00:00:00.000Z");expect(first.processed).toBeGreaterThan(0);expect(second.processed).toBe(0)});
+});

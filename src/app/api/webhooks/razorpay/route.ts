@@ -1,0 +1,3 @@
+import {ingestRazorpayWebhook} from "@/lib/operations";
+export const runtime="nodejs";
+export async function POST(request:Request){const secret=process.env.RAZORPAY_WEBHOOK_SECRET??(process.env.NODE_ENV==="development"?"recoverai-local-webhook-secret-change-me":undefined);if(!secret)return Response.json({error:"Webhook secret is not configured"},{status:503});const raw=await request.text(),signature=request.headers.get("x-razorpay-signature")??"";try{return Response.json(ingestRazorpayWebhook(raw,signature,secret))}catch(error){return Response.json({error:error instanceof Error?error.message:"Webhook rejected"},{status:401})}}

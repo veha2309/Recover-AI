@@ -1,0 +1,236 @@
+.dynamic-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #171d31;
+  color: white;
+  border-radius: 11px;
+  padding: 14px 17px;
+}
+.dynamic-toolbar > div {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+.dynamic-toolbar small {
+  font-size: 8px;
+  color: #9e91e5;
+  letter-spacing: 1px;
+}
+.dynamic-toolbar > div b {
+  font-size: 12px;
+  margin-top: 3px;
+}
+.dynamic-toolbar > span {
+  font-size: 9px;
+  color: #aeb4c5;
+  margin-right: 8px;
+}
+.dynamic-toolbar button {
+  border: 1px solid #3c455f;
+  color: #d6dae5;
+  background: #222a40;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 9px;
+  cursor: pointer;
+}
+.dynamic-toolbar button.primary-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: #7457ed;
+  color: white;
+  font-weight: 700;
+}
+.dynamic-toolbar svg {
+  width: 13px;
+}
+.dynamic-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 14px 0;
+}
+.dynamic-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 14px;
+}
+.dynamic-queue,
+.dynamic-detail {
+  padding: 20px;
+}
+.dynamic-queue > button {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #eceef3;
+  background: white;
+  padding: 11px 5px;
+  text-align: left;
+  cursor: pointer;
+}
+.dynamic-queue > button.selected {
+  background: #f4f1ff;
+}
+.dynamic-queue > button > strong {
+  width: 34px;
+  height: 28px;
+  border-radius: 6px;
+  background: #eeeaff;
+  color: #654be0;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+}
+.dynamic-queue > button > span {
+  display: flex;
+  flex-direction: column;
+}
+.dynamic-queue b {
+  font-size: 10px;
+}
+.dynamic-queue small {
+  font-size: 8px;
+  color: #858d9d;
+  margin-top: 3px;
+}
+.dynamic-actions {
+  margin: 16px 0;
+}
+.plan-btn,
+.send-reply {
+  border: 0;
+  border-radius: 7px;
+  background: #6650df;
+  color: white;
+  padding: 9px 12px;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.reply-box {
+  margin-top: 12px;
+  background: #f8f8fb;
+  border: 1px solid #ececf2;
+  border-radius: 8px;
+  padding: 12px;
+}
+.reply-box label {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+.reply-box textarea {
+  width: 100%;
+  height: 64px;
+  resize: vertical;
+  border: 1px solid #dadde6;
+  border-radius: 6px;
+  padding: 8px;
+  font: 10px Arial;
+  background: white;
+}
+.reply-presets {
+  display: flex;
+  gap: 6px;
+  margin: 7px 0;
+}
+.reply-presets button {
+  border: 1px solid #dcdde5;
+  background: white;
+  border-radius: 12px;
+  padding: 4px 8px;
+  font-size: 8px;
+  cursor: pointer;
+}
+.dynamic-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+.dynamic-facts > div {
+  background: #f8f8fb;
+  border-radius: 7px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.dynamic-facts small {
+  font-size: 8px;
+  color: #8a91a0;
+}
+.dynamic-facts b {
+  font-size: 10px;
+  margin-top: 4px;
+}
+.dynamic-detail h3 {
+  font-size: 11px;
+  margin: 18px 0 8px;
+}
+.dynamic-events > div {
+  display: grid;
+  grid-template-columns: 24px 1fr 58px;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid #eceef3;
+}
+.dynamic-events i {
+  font-style: normal;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #e8f7f1;
+  color: #087854;
+  font-size: 8px;
+}
+.dynamic-events span {
+  display: flex;
+  flex-direction: column;
+}
+.dynamic-events b {
+  font-size: 9px;
+}
+.dynamic-events small {
+  font-size: 8px;
+  color: #8a91a0;
+  margin-top: 2px;
+}
+.dynamic-events code {
+  font-size: 8px;
+  color: #8991a1;
+}
+@media (max-width: 1000px) {
+  .dynamic-grid {
+    grid-template-columns: 1fr;
+  }
+  .dynamic-queue {
+    max-height: 340px;
+    overflow: auto;
+  }
+  .dynamic-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 650px) {
+  .dynamic-toolbar {
+    flex-wrap: wrap;
+  }
+  .dynamic-toolbar > div {
+    width: 100%;
+  }
+  .dynamic-metrics {
+    grid-template-columns: 1fr;
+  }
+  .dynamic-facts {
+    grid-template-columns: 1fr;
+  }
+}

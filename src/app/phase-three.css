@@ -1,0 +1,136 @@
+.ops-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.ops-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 14px;
+}
+.ops-panel,
+.provider-ledger {
+  padding: 20px;
+}
+.approval-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 15px;
+  padding: 13px 2px;
+  border-top: 1px solid #eceef3;
+}
+.approval-row > span {
+  display: flex;
+  flex-direction: column;
+}
+.approval-row small,
+.job-row small,
+.provider-ledger small {
+  font-size: 8px;
+  color: #8a91a0;
+}
+.approval-row b {
+  font-size: 11px;
+  margin-top: 3px;
+}
+.approval-row p {
+  font-size: 9px;
+  color: #70798b;
+  margin: 4px 0 0;
+}
+.approval-row strong {
+  font-size: 11px;
+}
+.approval-row > div {
+  display: flex;
+  gap: 6px;
+}
+.approval-row button,
+.ops-title > button {
+  border: 1px solid #dddfe8;
+  background: white;
+  border-radius: 6px;
+  padding: 6px 9px;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.approval-row button.approve,
+.ops-title > button {
+  background: #6650df;
+  color: white;
+  border-color: #6650df;
+}
+.ops-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.job-row {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 2px;
+  border-top: 1px solid #eceef3;
+}
+.job-row > i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #17b47e;
+}
+.job-row > i.pending {
+  background: #f0a441;
+}
+.job-row > span,
+.provider-ledger > div > span {
+  display: flex;
+  flex-direction: column;
+}
+.job-row b {
+  font-size: 10px;
+}
+.provider-ledger {
+  margin-top: 14px;
+}
+.provider-ledger > div:not(.title) {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 20px;
+  align-items: center;
+  border-top: 1px solid #eceef3;
+  padding: 12px 2px;
+}
+.provider-ledger b {
+  font-size: 10px;
+}
+.provider-ledger strong {
+  font-size: 12px;
+  color: #07875e;
+}
+.ops-empty {
+  font-size: 10px;
+  color: #8a91a0;
+  background: #f8f8fb;
+  border-radius: 7px;
+  padding: 14px;
+}
+@media (max-width: 950px) {
+  .ops-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ops-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 650px) {
+  .ops-metrics {
+    grid-template-columns: 1fr;
+  }
+  .approval-row {
+    grid-template-columns: 1fr auto;
+  }
+}

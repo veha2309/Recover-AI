@@ -1,0 +1,2146 @@
+{
+  "version": "recoverai-dataset-v1",
+  "name": "development",
+  "cases": [
+    {
+      "customer": "Customer 3107-1",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "9144000",
+      "currency": "INR",
+      "cause": "HIGH_VALUE",
+      "evidence": [
+        "invoice:12_days_overdue",
+        "amount:high_value"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Enterprise",
+      "id": "GEN-3107-001"
+    },
+    {
+      "customer": "Customer 3107-2",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "297415",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "renewal:day_0"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 72
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SaaS",
+      "id": "GEN-3107-002"
+    },
+    {
+      "customer": "Customer 3107-3",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "831896",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "checkout:address_step",
+        "cart:high_intent"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 2,
+          "response": "Paid using the simpler link."
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-003"
+    },
+    {
+      "customer": "Customer 3107-4",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "405777",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_2h",
+        "email:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 4
+        },
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 18
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-004"
+    },
+    {
+      "customer": "Customer 3107-5",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "793800",
+      "currency": "INR",
+      "cause": "UNREACHABLE",
+      "evidence": [
+        "invoice:45_days_overdue",
+        "email:bounced"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "B2B",
+      "id": "GEN-3107-005"
+    },
+    {
+      "customer": "Customer 3107-6",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "149900",
+      "currency": "INR",
+      "cause": "EXPIRED_CARD",
+      "evidence": [
+        "card:expired",
+        "subscription:active_14_months"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "REQUEST_PAYMENT_METHOD",
+        "RETRY_PAYMENT"
+      ],
+      "outcomes": {
+        "REQUEST_PAYMENT_METHOD": {
+          "result": "RECOVERED",
+          "afterHours": 12,
+          "response": "Card updated."
+        },
+        "RETRY_PAYMENT": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "REQUEST_PAYMENT_METHOD",
+      "segment": "SaaS",
+      "id": "GEN-3107-006"
+    },
+    {
+      "customer": "Customer 3107-7",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1427881",
+      "currency": "INR",
+      "cause": "TRANSIENT_NETWORK",
+      "evidence": [
+        "processor:network_timeout",
+        "attempts:1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 6
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-007"
+    },
+    {
+      "customer": "Customer 3107-8",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "169323",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "payment:upi_timeout",
+        "cart:retained"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 1
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-008"
+    },
+    {
+      "customer": "Customer 3107-9",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "4032000",
+      "currency": "INR",
+      "cause": "ADMIN_DELAY",
+      "evidence": [
+        "invoice:18_days_overdue",
+        "ap_contact:verified"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 5,
+          "response": "Will pay Friday.",
+          "promiseDays": 3,
+          "promiseKept": true
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-009"
+    },
+    {
+      "customer": "Customer 3107-10",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "114885",
+      "currency": "INR",
+      "cause": "AUTHENTICATION_REQUIRED",
+      "evidence": [
+        "processor:3ds_required"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "REQUEST_PAYMENT_METHOD"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 3
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "SaaS",
+      "id": "GEN-3107-010"
+    },
+    {
+      "customer": "Customer 3107-11",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "474427",
+      "currency": "INR",
+      "cause": "OPT_OUT",
+      "evidence": [
+        "customer:do_not_contact"
+      ],
+      "flags": {
+        "optOut": true
+      },
+      "eligibleActions": [
+        "CLOSE"
+      ],
+      "outcomes": {
+        "CLOSE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "CLOSE",
+      "segment": "SaaS",
+      "id": "GEN-3107-011"
+    },
+    {
+      "customer": "Customer 3107-12",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "1702000",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "invoice:31_days_overdue",
+        "reply:budget_delay"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RECORD_PROMISE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 8,
+          "response": "Promise next Monday.",
+          "promiseDays": 4,
+          "promiseKept": false
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-012"
+    },
+    {
+      "customer": "Customer 3107-13",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "510489",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "cart:abandoned_payment_step",
+        "visits:3"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "CREATE_PAYMENT_LINK"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        },
+        "CREATE_PAYMENT_LINK": {
+          "result": "FAILED",
+          "afterHours": 12
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "Commerce",
+      "id": "GEN-3107-013"
+    },
+    {
+      "customer": "Customer 3107-14",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1754870",
+      "currency": "INR",
+      "cause": "FRAUD_SIGNAL",
+      "evidence": [
+        "risk:velocity_flag"
+      ],
+      "flags": {
+        "fraud": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-014"
+    },
+    {
+      "customer": "Customer 3107-15",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "791912",
+      "currency": "INR",
+      "cause": "DISPUTE",
+      "evidence": [
+        "processor:charge_disputed"
+      ],
+      "flags": {
+        "disputed": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Commerce",
+      "id": "GEN-3107-015"
+    },
+    {
+      "customer": "Customer 3107-16",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "2942500",
+      "currency": "INR",
+      "cause": "FORGOTTEN_PAYMENT",
+      "evidence": [
+        "invoice:9_days_overdue",
+        "prior:on_time"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 20
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "B2B",
+      "id": "GEN-3107-016"
+    },
+    {
+      "customer": "Customer 3107-17",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "743274",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_4h",
+        "sms:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 8
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-017"
+    },
+    {
+      "customer": "Customer 3107-18",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "461916",
+      "currency": "INR",
+      "cause": "CONTRADICTORY_EVIDENCE",
+      "evidence": [
+        "processor:unknown",
+        "currency:conflict"
+      ],
+      "flags": {
+        "ambiguous": true
+      },
+      "eligibleActions": [
+        "ABSTAIN"
+      ],
+      "outcomes": {
+        "ABSTAIN": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ABSTAIN",
+      "segment": "SaaS",
+      "id": "GEN-3107-018"
+    },
+    {
+      "customer": "Customer 3107-19",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "195597",
+      "currency": "INR",
+      "cause": "MANUAL_HOLD",
+      "evidence": [
+        "account:manual_review"
+      ],
+      "flags": {
+        "manualHold": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-019"
+    },
+    {
+      "customer": "Customer 3107-20",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "304878",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "salary_cycle:day_1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 48
+        },
+        "SEND_REMINDER": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-020"
+    },
+    {
+      "customer": "Customer 3107-21",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "5760000",
+      "currency": "INR",
+      "cause": "HIGH_VALUE",
+      "evidence": [
+        "invoice:12_days_overdue",
+        "amount:high_value"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Enterprise",
+      "id": "GEN-3107-021"
+    },
+    {
+      "customer": "Customer 3107-22",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "346401",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "renewal:day_0"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 72
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SaaS",
+      "id": "GEN-3107-022"
+    },
+    {
+      "customer": "Customer 3107-23",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "943882",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "checkout:address_step",
+        "cart:high_intent"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 2,
+          "response": "Paid using the simpler link."
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-023"
+    },
+    {
+      "customer": "Customer 3107-24",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "250724",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_2h",
+        "email:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 4
+        },
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 18
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-024"
+    },
+    {
+      "customer": "Customer 3107-25",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "931000",
+      "currency": "INR",
+      "cause": "UNREACHABLE",
+      "evidence": [
+        "invoice:45_days_overdue",
+        "email:bounced"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "B2B",
+      "id": "GEN-3107-025"
+    },
+    {
+      "customer": "Customer 3107-26",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "170886",
+      "currency": "INR",
+      "cause": "EXPIRED_CARD",
+      "evidence": [
+        "card:expired",
+        "subscription:active_14_months"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "REQUEST_PAYMENT_METHOD",
+        "RETRY_PAYMENT"
+      ],
+      "outcomes": {
+        "REQUEST_PAYMENT_METHOD": {
+          "result": "RECOVERED",
+          "afterHours": 12,
+          "response": "Card updated."
+        },
+        "RETRY_PAYMENT": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "REQUEST_PAYMENT_METHOD",
+      "segment": "SaaS",
+      "id": "GEN-3107-026"
+    },
+    {
+      "customer": "Customer 3107-27",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "863928",
+      "currency": "INR",
+      "cause": "TRANSIENT_NETWORK",
+      "evidence": [
+        "processor:network_timeout",
+        "attempts:1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 6
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-027"
+    },
+    {
+      "customer": "Customer 3107-28",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "200109",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "payment:upi_timeout",
+        "cart:retained"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 1
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-028"
+    },
+    {
+      "customer": "Customer 3107-29",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "4620000",
+      "currency": "INR",
+      "cause": "ADMIN_DELAY",
+      "evidence": [
+        "invoice:18_days_overdue",
+        "ap_contact:verified"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 5,
+          "response": "Will pay Friday.",
+          "promiseDays": 3,
+          "promiseKept": true
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-029"
+    },
+    {
+      "customer": "Customer 3107-30",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "128871",
+      "currency": "INR",
+      "cause": "AUTHENTICATION_REQUIRED",
+      "evidence": [
+        "processor:3ds_required"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "REQUEST_PAYMENT_METHOD"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 3
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "SaaS",
+      "id": "GEN-3107-030"
+    },
+    {
+      "customer": "Customer 3107-31",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "565413",
+      "currency": "INR",
+      "cause": "OPT_OUT",
+      "evidence": [
+        "customer:do_not_contact"
+      ],
+      "flags": {
+        "optOut": true
+      },
+      "eligibleActions": [
+        "CLOSE"
+      ],
+      "outcomes": {
+        "CLOSE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "CLOSE",
+      "segment": "SaaS",
+      "id": "GEN-3107-031"
+    },
+    {
+      "customer": "Customer 3107-32",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "1961000",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "invoice:31_days_overdue",
+        "reply:budget_delay"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RECORD_PROMISE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 8,
+          "response": "Promise next Monday.",
+          "promiseDays": 4,
+          "promiseKept": false
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-032"
+    },
+    {
+      "customer": "Customer 3107-33",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "574875",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "cart:abandoned_payment_step",
+        "visits:3"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "CREATE_PAYMENT_LINK"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        },
+        "CREATE_PAYMENT_LINK": {
+          "result": "FAILED",
+          "afterHours": 12
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "Commerce",
+      "id": "GEN-3107-033"
+    },
+    {
+      "customer": "Customer 3107-34",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1120417",
+      "currency": "INR",
+      "cause": "FRAUD_SIGNAL",
+      "evidence": [
+        "risk:velocity_flag"
+      ],
+      "flags": {
+        "fraud": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-034"
+    },
+    {
+      "customer": "Customer 3107-35",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "917898",
+      "currency": "INR",
+      "cause": "DISPUTE",
+      "evidence": [
+        "processor:charge_disputed"
+      ],
+      "flags": {
+        "disputed": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Commerce",
+      "id": "GEN-3107-035"
+    },
+    {
+      "customer": "Customer 3107-36",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "3327500",
+      "currency": "INR",
+      "cause": "FORGOTTEN_PAYMENT",
+      "evidence": [
+        "invoice:9_days_overdue",
+        "prior:on_time"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 20
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "B2B",
+      "id": "GEN-3107-036"
+    },
+    {
+      "customer": "Customer 3107-37",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "466021",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_4h",
+        "sms:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 8
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-037"
+    },
+    {
+      "customer": "Customer 3107-38",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "538902",
+      "currency": "INR",
+      "cause": "CONTRADICTORY_EVIDENCE",
+      "evidence": [
+        "processor:unknown",
+        "currency:conflict"
+      ],
+      "flags": {
+        "ambiguous": true
+      },
+      "eligibleActions": [
+        "ABSTAIN"
+      ],
+      "outcomes": {
+        "ABSTAIN": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ABSTAIN",
+      "segment": "SaaS",
+      "id": "GEN-3107-038"
+    },
+    {
+      "customer": "Customer 3107-39",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "222183",
+      "currency": "INR",
+      "cause": "MANUAL_HOLD",
+      "evidence": [
+        "account:manual_review"
+      ],
+      "flags": {
+        "manualHold": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-039"
+    },
+    {
+      "customer": "Customer 3107-40",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "187425",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "salary_cycle:day_1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 48
+        },
+        "SEND_REMINDER": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-040"
+    },
+    {
+      "customer": "Customer 3107-41",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "6768000",
+      "currency": "INR",
+      "cause": "HIGH_VALUE",
+      "evidence": [
+        "invoice:12_days_overdue",
+        "amount:high_value"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Enterprise",
+      "id": "GEN-3107-041"
+    },
+    {
+      "customer": "Customer 3107-42",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "395387",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "renewal:day_0"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 72
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SaaS",
+      "id": "GEN-3107-042"
+    },
+    {
+      "customer": "Customer 3107-43",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "567929",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "checkout:address_step",
+        "cart:high_intent"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 2,
+          "response": "Paid using the simpler link."
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-043"
+    },
+    {
+      "customer": "Customer 3107-44",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "296910",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_2h",
+        "email:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 4
+        },
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 18
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-044"
+    },
+    {
+      "customer": "Customer 3107-45",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "1068200",
+      "currency": "INR",
+      "cause": "UNREACHABLE",
+      "evidence": [
+        "invoice:45_days_overdue",
+        "email:bounced"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "B2B",
+      "id": "GEN-3107-045"
+    },
+    {
+      "customer": "Customer 3107-46",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "191872",
+      "currency": "INR",
+      "cause": "EXPIRED_CARD",
+      "evidence": [
+        "card:expired",
+        "subscription:active_14_months"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "REQUEST_PAYMENT_METHOD",
+        "RETRY_PAYMENT"
+      ],
+      "outcomes": {
+        "REQUEST_PAYMENT_METHOD": {
+          "result": "RECOVERED",
+          "afterHours": 12,
+          "response": "Card updated."
+        },
+        "RETRY_PAYMENT": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "REQUEST_PAYMENT_METHOD",
+      "segment": "SaaS",
+      "id": "GEN-3107-046"
+    },
+    {
+      "customer": "Customer 3107-47",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1031914",
+      "currency": "INR",
+      "cause": "TRANSIENT_NETWORK",
+      "evidence": [
+        "processor:network_timeout",
+        "attempts:1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 6
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-047"
+    },
+    {
+      "customer": "Customer 3107-48",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "230895",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "payment:upi_timeout",
+        "cart:retained"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 1
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-048"
+    },
+    {
+      "customer": "Customer 3107-49",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "5208000",
+      "currency": "INR",
+      "cause": "ADMIN_DELAY",
+      "evidence": [
+        "invoice:18_days_overdue",
+        "ap_contact:verified"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 5,
+          "response": "Will pay Friday.",
+          "promiseDays": 3,
+          "promiseKept": true
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-049"
+    },
+    {
+      "customer": "Customer 3107-50",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "81918",
+      "currency": "INR",
+      "cause": "AUTHENTICATION_REQUIRED",
+      "evidence": [
+        "processor:3ds_required"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "REQUEST_PAYMENT_METHOD"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 3
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "SaaS",
+      "id": "GEN-3107-050"
+    },
+    {
+      "customer": "Customer 3107-51",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "656399",
+      "currency": "INR",
+      "cause": "OPT_OUT",
+      "evidence": [
+        "customer:do_not_contact"
+      ],
+      "flags": {
+        "optOut": true
+      },
+      "eligibleActions": [
+        "CLOSE"
+      ],
+      "outcomes": {
+        "CLOSE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "CLOSE",
+      "segment": "SaaS",
+      "id": "GEN-3107-051"
+    },
+    {
+      "customer": "Customer 3107-52",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "2220000",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "invoice:31_days_overdue",
+        "reply:budget_delay"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RECORD_PROMISE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 8,
+          "response": "Promise next Monday.",
+          "promiseDays": 4,
+          "promiseKept": false
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-052"
+    },
+    {
+      "customer": "Customer 3107-53",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "358722",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "cart:abandoned_payment_step",
+        "visits:3"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "CREATE_PAYMENT_LINK"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        },
+        "CREATE_PAYMENT_LINK": {
+          "result": "FAILED",
+          "afterHours": 12
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "Commerce",
+      "id": "GEN-3107-053"
+    },
+    {
+      "customer": "Customer 3107-54",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1309403",
+      "currency": "INR",
+      "cause": "FRAUD_SIGNAL",
+      "evidence": [
+        "risk:velocity_flag"
+      ],
+      "flags": {
+        "fraud": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-054"
+    },
+    {
+      "customer": "Customer 3107-55",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1043884",
+      "currency": "INR",
+      "cause": "DISPUTE",
+      "evidence": [
+        "processor:charge_disputed"
+      ],
+      "flags": {
+        "disputed": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Commerce",
+      "id": "GEN-3107-055"
+    },
+    {
+      "customer": "Customer 3107-56",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "2035000",
+      "currency": "INR",
+      "cause": "FORGOTTEN_PAYMENT",
+      "evidence": [
+        "invoice:9_days_overdue",
+        "prior:on_time"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 20
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "B2B",
+      "id": "GEN-3107-056"
+    },
+    {
+      "customer": "Customer 3107-57",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "548607",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_4h",
+        "sms:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 8
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-057"
+    },
+    {
+      "customer": "Customer 3107-58",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "615888",
+      "currency": "INR",
+      "cause": "CONTRADICTORY_EVIDENCE",
+      "evidence": [
+        "processor:unknown",
+        "currency:conflict"
+      ],
+      "flags": {
+        "ambiguous": true
+      },
+      "eligibleActions": [
+        "ABSTAIN"
+      ],
+      "outcomes": {
+        "ABSTAIN": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ABSTAIN",
+      "segment": "SaaS",
+      "id": "GEN-3107-058"
+    },
+    {
+      "customer": "Customer 3107-59",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "132930",
+      "currency": "INR",
+      "cause": "MANUAL_HOLD",
+      "evidence": [
+        "account:manual_review"
+      ],
+      "flags": {
+        "manualHold": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-059"
+    },
+    {
+      "customer": "Customer 3107-60",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "222411",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "salary_cycle:day_1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 48
+        },
+        "SEND_REMINDER": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-060"
+    },
+    {
+      "customer": "Customer 3107-61",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "7776000",
+      "currency": "INR",
+      "cause": "HIGH_VALUE",
+      "evidence": [
+        "invoice:12_days_overdue",
+        "amount:high_value"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Enterprise",
+      "id": "GEN-3107-061"
+    },
+    {
+      "customer": "Customer 3107-62",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "444373",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "renewal:day_0"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 72
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SaaS",
+      "id": "GEN-3107-062"
+    },
+    {
+      "customer": "Customer 3107-63",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "679915",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "checkout:address_step",
+        "cart:high_intent"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 2,
+          "response": "Paid using the simpler link."
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-063"
+    },
+    {
+      "customer": "Customer 3107-64",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "343096",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_2h",
+        "email:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 4
+        },
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 18
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-064"
+    },
+    {
+      "customer": "Customer 3107-65",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "1205400",
+      "currency": "INR",
+      "cause": "UNREACHABLE",
+      "evidence": [
+        "invoice:45_days_overdue",
+        "email:bounced"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "B2B",
+      "id": "GEN-3107-065"
+    },
+    {
+      "customer": "Customer 3107-66",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "121419",
+      "currency": "INR",
+      "cause": "EXPIRED_CARD",
+      "evidence": [
+        "card:expired",
+        "subscription:active_14_months"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "REQUEST_PAYMENT_METHOD",
+        "RETRY_PAYMENT"
+      ],
+      "outcomes": {
+        "REQUEST_PAYMENT_METHOD": {
+          "result": "RECOVERED",
+          "afterHours": 12,
+          "response": "Card updated."
+        },
+        "RETRY_PAYMENT": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "REQUEST_PAYMENT_METHOD",
+      "segment": "SaaS",
+      "id": "GEN-3107-066"
+    },
+    {
+      "customer": "Customer 3107-67",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1199900",
+      "currency": "INR",
+      "cause": "TRANSIENT_NETWORK",
+      "evidence": [
+        "processor:network_timeout",
+        "attempts:1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 6
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-067"
+    },
+    {
+      "customer": "Customer 3107-68",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "261681",
+      "currency": "INR",
+      "cause": "CHECKOUT_FRICTION",
+      "evidence": [
+        "payment:upi_timeout",
+        "cart:retained"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 1
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-068"
+    },
+    {
+      "customer": "Customer 3107-69",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "3234000",
+      "currency": "INR",
+      "cause": "ADMIN_DELAY",
+      "evidence": [
+        "invoice:18_days_overdue",
+        "ap_contact:verified"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 5,
+          "response": "Will pay Friday.",
+          "promiseDays": 3,
+          "promiseKept": true
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-069"
+    },
+    {
+      "customer": "Customer 3107-70",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "95904",
+      "currency": "INR",
+      "cause": "AUTHENTICATION_REQUIRED",
+      "evidence": [
+        "processor:3ds_required"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "REQUEST_PAYMENT_METHOD"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 3
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "SaaS",
+      "id": "GEN-3107-070"
+    },
+    {
+      "customer": "Customer 3107-71",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "747385",
+      "currency": "INR",
+      "cause": "OPT_OUT",
+      "evidence": [
+        "customer:do_not_contact"
+      ],
+      "flags": {
+        "optOut": true
+      },
+      "eligibleActions": [
+        "CLOSE"
+      ],
+      "outcomes": {
+        "CLOSE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "CLOSE",
+      "segment": "SaaS",
+      "id": "GEN-3107-071"
+    },
+    {
+      "customer": "Customer 3107-72",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "1350500",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "invoice:31_days_overdue",
+        "reply:budget_delay"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RECORD_PROMISE",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RECORD_PROMISE": {
+          "result": "PROMISE",
+          "afterHours": 8,
+          "response": "Promise next Monday.",
+          "promiseDays": 4,
+          "promiseKept": false
+        },
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RECORD_PROMISE",
+      "segment": "B2B",
+      "id": "GEN-3107-072"
+    },
+    {
+      "customer": "Customer 3107-73",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "423108",
+      "currency": "INR",
+      "cause": "PRICE_CONCERN",
+      "evidence": [
+        "cart:abandoned_payment_step",
+        "visits:3"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "CREATE_PAYMENT_LINK"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "NO_RESPONSE",
+          "afterHours": 24
+        },
+        "CREATE_PAYMENT_LINK": {
+          "result": "FAILED",
+          "afterHours": 12
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "Commerce",
+      "id": "GEN-3107-073"
+    },
+    {
+      "customer": "Customer 3107-74",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1498389",
+      "currency": "INR",
+      "cause": "FRAUD_SIGNAL",
+      "evidence": [
+        "risk:velocity_flag"
+      ],
+      "flags": {
+        "fraud": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-074"
+    },
+    {
+      "customer": "Customer 3107-75",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "1169870",
+      "currency": "INR",
+      "cause": "DISPUTE",
+      "evidence": [
+        "processor:charge_disputed"
+      ],
+      "flags": {
+        "disputed": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "Commerce",
+      "id": "GEN-3107-075"
+    },
+    {
+      "customer": "Customer 3107-76",
+      "type": "OVERDUE_RECEIVABLE",
+      "amountMinor": "2420000",
+      "currency": "INR",
+      "cause": "FORGOTTEN_PAYMENT",
+      "evidence": [
+        "invoice:9_days_overdue",
+        "prior:on_time"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "SEND_REMINDER",
+        "RECORD_PROMISE"
+      ],
+      "outcomes": {
+        "SEND_REMINDER": {
+          "result": "RECOVERED",
+          "afterHours": 20
+        }
+      },
+      "expectedBestAction": "SEND_REMINDER",
+      "segment": "B2B",
+      "id": "GEN-3107-076"
+    },
+    {
+      "customer": "Customer 3107-77",
+      "type": "CHECKOUT_ABANDONMENT",
+      "amountMinor": "631193",
+      "currency": "INR",
+      "cause": "FORGOTTEN_CHECKOUT",
+      "evidence": [
+        "cart:abandoned_4h",
+        "sms:consented"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "CREATE_PAYMENT_LINK",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "CREATE_PAYMENT_LINK": {
+          "result": "RECOVERED",
+          "afterHours": 8
+        }
+      },
+      "expectedBestAction": "CREATE_PAYMENT_LINK",
+      "segment": "Commerce",
+      "id": "GEN-3107-077"
+    },
+    {
+      "customer": "Customer 3107-78",
+      "type": "FAILED_SUBSCRIPTION",
+      "amountMinor": "692874",
+      "currency": "INR",
+      "cause": "CONTRADICTORY_EVIDENCE",
+      "evidence": [
+        "processor:unknown",
+        "currency:conflict"
+      ],
+      "flags": {
+        "ambiguous": true
+      },
+      "eligibleActions": [
+        "ABSTAIN"
+      ],
+      "outcomes": {
+        "ABSTAIN": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ABSTAIN",
+      "segment": "SaaS",
+      "id": "GEN-3107-078"
+    },
+    {
+      "customer": "Customer 3107-79",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "159516",
+      "currency": "INR",
+      "cause": "MANUAL_HOLD",
+      "evidence": [
+        "account:manual_review"
+      ],
+      "flags": {
+        "manualHold": true
+      },
+      "eligibleActions": [
+        "ESCALATE"
+      ],
+      "outcomes": {
+        "ESCALATE": {
+          "result": "NO_RESPONSE",
+          "afterHours": 0
+        }
+      },
+      "expectedBestAction": "ESCALATE",
+      "segment": "SMB",
+      "id": "GEN-3107-079"
+    },
+    {
+      "customer": "Customer 3107-80",
+      "type": "FAILED_PAYMENT",
+      "amountMinor": "257397",
+      "currency": "INR",
+      "cause": "INSUFFICIENT_FUNDS",
+      "evidence": [
+        "issuer_decline:insufficient_funds",
+        "salary_cycle:day_1"
+      ],
+      "flags": {},
+      "eligibleActions": [
+        "RETRY_PAYMENT",
+        "SEND_REMINDER"
+      ],
+      "outcomes": {
+        "RETRY_PAYMENT": {
+          "result": "RECOVERED",
+          "afterHours": 48
+        },
+        "SEND_REMINDER": {
+          "result": "FAILED",
+          "afterHours": 24
+        }
+      },
+      "expectedBestAction": "RETRY_PAYMENT",
+      "segment": "SMB",
+      "id": "GEN-3107-080"
+    }
+  ]
+}

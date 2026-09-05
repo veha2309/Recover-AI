@@ -1,0 +1,2 @@
+import {expect,test} from "@playwright/test";
+test("runs the five-minute portfolio demo",async({page})=>{await page.goto("/");await expect(page.getByText("RecoverAI").first()).toBeVisible();await expect(page.getByText("Revenue at risk")).toBeVisible();await page.getByRole("button",{name:"Evaluation"}).click();await expect(page.getByText("Incremental net recovery",{exact:false})).toBeVisible();await page.getByRole("button",{name:"Audit"}).click();await expect(page.getByText("Evidence chain verified")).toBeVisible()});
