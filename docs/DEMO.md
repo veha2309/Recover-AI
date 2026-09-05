@@ -1,6 +1,8 @@
 # Five-minute RecoverAI demo
 
-1. Start the app and click **Run recovery**. Call out the permanent simulation banner and the local Gemma 3 status.
+For the hosted Gemini demo, use [the recording script](RECORDING.md).
+
+1. Start the app and click **Run recovery**. Call out the permanent simulation banner and the actual live-AI/fallback counts.
 2. On **Command center**, frame the ₹ at-risk portfolio and the incremental net lift over the fixed retry/remind strategy.
 3. Open **Live run** to show proposals flowing through deterministic policy checks.
 4. In **Cases**, inspect Maya Studio (payment-link recovery), Northstar Labs (kept promise), Copper Works (broken promise), Kite Commerce (dispute escalation), and River Education (abstention).
