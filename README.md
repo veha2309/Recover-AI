@@ -8,7 +8,7 @@ RecoverAI is a bounded, auditable revenue-recovery agent built for Razorpay AI B
 
 Render Free deployment settings are in `render.yaml`. Follow [the deployment guide](docs/DEPLOYMENT.md) to connect your repository, configure your server-only Google API key, and obtain your live URL. Free hosting uses disposable SQLite history. Real production use still requires durable storage and the controls listed in the guide.
 
-Set `AI_PROVIDER=gemini`, `GOOGLE_API_KEY`, and optionally `GEMINI_MODEL` in `.env.local` (default: `gemini-2.5-flash`). Set `DEMO_PASSWORD` for production startup; browser login is `demo` with that password. Never commit actual keys. The configured model now handles all AI proposal routes, with audited deterministic fallback on failure.
+Set `AI_PROVIDER=gemini`, `GOOGLE_API_KEY`, and optionally `GEMINI_MODEL` in `.env.local` (default: `gemini-3.5-flash`). Set `DEMO_PASSWORD` for production startup; browser login is `demo` with that password. Never commit actual keys. The configured model now handles all AI proposal routes, with audited deterministic fallback on failure.
 
 ### Local setup
 
@@ -48,3 +48,4 @@ Phase Three adds signed Razorpay webhook ingestion, duplicate-safe provider reco
 Phase Four adds a live priority queue, runtime case generation, bounded on-demand local AI, an interactive simulated clock, and a customer-response sandbox with incremental state transitions. See `docs/PHASE_FOUR.md`.
 
 Phase Five switches the default local model to Gemma 3, isolates evaluator-only ground truth from agent inputs, separates live-AI and fallback cohorts, and enforces action-to-Razorpay evidence consistency. See `docs/PHASE_FIVE.md`.
+

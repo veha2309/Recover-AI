@@ -1,9 +1,22 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { proposeWithAI, aiStatus, aiFailureReason } from "../src/lib/ai";
+import { proposeWithAI, proposeBatchWithAI, aiStatus, aiFailureReason } from "../src/lib/ai";
 import { demoDataset } from "../src/lib/dataset";
 
 afterEach(() => { vi.unstubAllEnvs(); vi.unstubAllGlobals(); });
 describe("Gemini planner", () => {
+  it("uses one request for four cases and rejects cross-case evidence", async () => {
+    vi.stubEnv("AI_PROVIDER", "gemini"); vi.stubEnv("GOOGLE_API_KEY", "test-secret");
+    const cases = demoDataset(42).slice(0, 4);
+    const decisions = cases.map(c => ({ caseId: c.id, diagnosisCode: "RECOVERY", confidenceBps: 9000, evidenceIds: [`${c.id}-E1`], action: c.eligibleActions[0], rationale: "An eligible intervention." }));
+    const fetchMock = vi.fn().mockImplementation(() => Promise.resolve(Response.json({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: JSON.stringify({ decisions }) }] } }] })));
+    vi.stubGlobal("fetch", fetchMock);
+    expect((await proposeBatchWithAI(cases)).size).toBe(4);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const payload = JSON.parse(JSON.parse(fetchMock.mock.calls[0][1].body).contents[0].parts[0].text);
+    expect(payload[0]).not.toHaveProperty("outcomes");
+    decisions[1].evidenceIds = decisions[0].evidenceIds;
+    await expect(proposeBatchWithAI(cases)).rejects.toThrow("per-case validation");
+  });
   it("reports quota failures without exposing the provider body or secret", async () => {
     vi.stubEnv("AI_PROVIDER", "gemini"); vi.stubEnv("GOOGLE_API_KEY", "test-secret");
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(Response.json({ error: { message: "test-secret" } }, { status: 429 })));

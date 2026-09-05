@@ -14,7 +14,7 @@ Render Free sleeps after 15 minutes without requests. Local SQLite history is di
 
 ## Gemini
 
-Get a key at https://aistudio.google.com/apikey. Locally, add `GOOGLE_API_KEY` and `AI_PROVIDER=gemini` to `.env.local`. `GEMINI_API_KEY` is also accepted. `GEMINI_MODEL` defaults to `gemini-2.5-flash`; set another text model supported by your account that supports structured JSON output. Restart after changing local configuration. Set `AI_PROVIDER=ollama` to return to the local model.
+Get a key at https://aistudio.google.com/apikey. Locally, add `GOOGLE_API_KEY` and `AI_PROVIDER=gemini` to `.env.local`. `GEMINI_API_KEY` is also accepted. `GEMINI_MODEL` defaults to `gemini-3.5-flash`; set another text model supported by your account that supports structured JSON output. Restart after changing local configuration. Set `AI_PROVIDER=ollama` to return to the local model.
 
 The status badge indicates configuration, not verified API access. A run's live decision count proves accepted model responses; missing keys, quota errors, and invalid output use explicitly recorded deterministic fallbacks. Keys stay on the server. Gemini receives projected case evidence, never evaluator outcome labels. See https://ai.google.dev/api and https://ai.google.dev/gemini-api/docs/structured-output.
 
@@ -25,3 +25,4 @@ Use durable storage: a paid Render service with a disk and `RECOVERAI_DB` inside
 Replace the shared demo password with user authentication, roles and tenant isolation. Add durable per-user rate limits, model spending limits, monitoring, retention rules and a scheduled workflow worker. Validate real customer-data handling and complete provider onboarding before designing any live-money path. Current Razorpay integration deliberately accepts test keys only.
 
 Render limits: https://render.com/docs/free
+

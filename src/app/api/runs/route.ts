@@ -6,7 +6,7 @@ import {
   policy,
   ToolExecution,
 } from "@/lib/engine";
-import { aiStatus, proposeWithAI, aiFailureReason } from "@/lib/ai";
+import { aiStatus, proposeBatchWithAI, aiFailureReason } from "@/lib/ai";
 import { createRazorpayTestLink } from "@/lib/razorpay";
 import { repository } from "@/lib/store";
 export const runtime = "nodejs";
@@ -29,19 +29,10 @@ export async function POST(request: Request) {
   const failures = new Set<string>();
   if (!status.available || !status.model) failures.add("AI provider is not configured or available.");
   if (status.available && status.model) {
-    const liveCases = cases.slice(0, 4);
-    let cursor = 0;
-    const workers = Array.from({ length: 2 }, async () => {
-      while (cursor < liveCases.length) {
-        const item = liveCases[cursor++];
-        try {
-          decisions.set(item.id, await proposeWithAI(item));
-        } catch (error) {
-          failures.add(aiFailureReason(error));
-        }
-      }
-    });
-    await Promise.all(workers);
+    try {
+      const batch = await proposeBatchWithAI(cases.slice(0, 4).map(toAgentContext));
+      for (const [id, decision] of batch) decisions.set(id, decision);
+    } catch (error) { failures.add(aiFailureReason(error)); }
   }
   const razorpayConfigured = Boolean(
     process.env.RAZORPAY_KEY_ID?.startsWith("rzp_test_") &&
