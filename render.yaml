@@ -12,11 +12,13 @@ services:
       - key: AI_PROVIDER
         value: gemini
       - key: GEMINI_MODEL
-        value: gemini-3.5-flash
+        value: gemini-3.5-flash-lite
       - key: GOOGLE_API_KEY
         sync: false
       - key: DEMO_PASSWORD
         sync: false
       - key: RECOVERAI_DB
         value: /tmp/recoverai/recoverai.sqlite
+
+
 

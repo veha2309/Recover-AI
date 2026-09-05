@@ -3,7 +3,7 @@ import { ollamaStatus, proposeWithOllama } from "./ollama";
 
 const apiKey = () => process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 export const aiProvider = () => process.env.AI_PROVIDER || (apiKey() ? "gemini" : "ollama");
-export const geminiModel = () => process.env.GEMINI_MODEL || "gemini-3.5-flash";
+export const geminiModel = () => process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
 
 export class AIError extends Error {}
 export function aiFailureReason(error: unknown) {
@@ -110,4 +110,5 @@ export async function proposeWithAI(context: AgentCaseContext): Promise<Decision
   }
   throw new AIError("Gemini returned an invalid decision after two attempts.");
 }
+
 
