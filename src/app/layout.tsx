@@ -4,6 +4,7 @@ import "./integrations.css";
 import "./phase-three.css";
 import "./phase-four.css";
 import "./phase-five.css";
+import "./workspace.css";
 
 export const metadata: Metadata = {
   title: "RecoverAI · Bounded Revenue Recovery",

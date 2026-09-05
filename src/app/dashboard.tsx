@@ -12,7 +12,6 @@ import {
   Play,
   RefreshCw,
   ShieldCheck,
-  Sparkles,
   Users,
 } from "lucide-react";
 import {
@@ -261,12 +260,10 @@ export default function Dashboard() {
     <div className="shell">
       <aside>
         <div className="brand">
-          <i>
-            <Sparkles />
-          </i>
+          <i className="brand-mark" aria-hidden="true">r.</i>
           <span>
             <b>RecoverAI</b>
-            <small>Revenue recovery agent</small>
+            <small>Revenue operations</small>
           </span>
         </div>
         <div className="mode">
@@ -275,10 +272,13 @@ export default function Dashboard() {
             ? "RAZORPAY TEST + SIMULATION"
             : "SIMULATION MODE"}
         </div>
-        <nav>
+        <div className="nav-caption">WORKSPACE</div>
+        <nav aria-label="Workspace">
           {(Object.keys(nav) as View[]).map((v, i) => (
             <button
               className={view === v ? "active" : ""}
+              aria-current={view === v ? "page" : undefined}
+              title={nav[v]}
               onClick={() => {
                 setView(v);
                 if (v === "operations") loadOperations();
@@ -337,7 +337,7 @@ export default function Dashboard() {
         {error && <div role="alert" style={{ padding: 16, color: "#b42318" }}>{error}. Use Run recovery to retry.</div>}
         <header>
           <div>
-            <small>RAZORPAY AI BUILDATHON 2026 · TRACK 03</small>
+            <small>WORKSPACE / RECOVERY OPERATIONS</small>
             <h1>{nav[view]}</h1>
           </div>
           <div className="head-actions">
@@ -435,9 +435,13 @@ function Command({
     b = run.baselineMetrics;
   return (
     <>
+      <div className="overview-heading">
+        <div><span className="eyebrow">PORTFOLIO OVERVIEW</span><h2>Every recovery.<br /><em>Accounted for.</em></h2></div>
+        <p>A clear view of revenue at risk, recovery decisions, and the evidence behind them.</p>
+      </div>
       <div className="complete">
         <span>
-          <CheckCircle2 /> BOUNDED AGENT RUN COMPLETE
+          <CheckCircle2 /> Recovery run complete
         </span>
         <small>20 cases · 4 revenue motions · deterministic outcomes</small>
       </div>
