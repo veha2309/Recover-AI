@@ -110,9 +110,16 @@ interface DynamicSnapshot {
   inferenceBudget: { limit: number; used: number; remaining: number };
 }
 
+async function readResponse(response: Response) {
+  const body = await response.json().catch(() => null);
+  if (!response.ok) throw new Error(body?.error || `Request failed (${response.status})`);
+  return body;
+}
+
 export default function Dashboard() {
   const [run, setRun] = useState<RunSnapshot | null>(null),
     [busy, setBusy] = useState(true),
+    [error, setError] = useState<string | null>(null),
     [view, setView] = useState<View>("command"),
     [selected, setSelected] = useState<string | null>(null),
     [operations, setOperations] = useState<OpsSnapshot | null>(null),
@@ -121,6 +128,8 @@ export default function Dashboard() {
     [service, setService] = useState({ ollama: false, razorpay: false });
   async function launch() {
     setBusy(true);
+    setError(null);
+    try {
     const r = await fetch("/api/runs", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -129,8 +138,10 @@ export default function Dashboard() {
         mode: service.razorpay ? "RAZORPAY_TEST" : "SIMULATION",
       }),
     });
-    setRun(await r.json());
-    setBusy(false);
+    setRun(await readResponse(r));
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Unable to create a run");
+    } finally { setBusy(false); }
   }
   async function loadOperations() {
     let response = await fetch("/api/operations");
@@ -207,10 +218,12 @@ export default function Dashboard() {
   }
   useEffect(() => {
     async function initialize() {
-      const s = await fetch("/api/status").then((r) => r.json());
+      try {
+      const s = await fetch("/api/status").then(readResponse);
       setService({ ollama: s.ollama.model, razorpay: s.razorpayTest });
       const existing = await fetch("/api/runs");
-      if (existing.ok) setRun(await existing.json());
+      const saved = await readResponse(existing);
+      if (saved) setRun(saved);
       else {
         const created = await fetch("/api/runs", {
           method: "POST",
@@ -220,9 +233,11 @@ export default function Dashboard() {
             mode: s.razorpayTest ? "RAZORPAY_TEST" : "SIMULATION",
           }),
         });
-        setRun(await created.json());
+        setRun(await readResponse(created));
       }
-      setBusy(false);
+      } catch (error) {
+        setError(error instanceof Error ? error.message : "Unable to load the demo");
+      } finally { setBusy(false); }
     }
     initialize();
   }, []);
@@ -318,6 +333,7 @@ export default function Dashboard() {
         </footer>
       </aside>
       <main>
+        {error && <div role="alert" style={{ padding: 16, color: "#b42318" }}>{error}. Use Run recovery to retry.</div>}
         <header>
           <div>
             <small>RAZORPAY AI BUILDATHON 2026 · TRACK 03</small>

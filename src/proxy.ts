@@ -17,7 +17,15 @@ export function proxy(request: NextRequest) {
   }
   if (!["GET", "HEAD", "OPTIONS"].includes(request.method)) {
     const origin = request.headers.get("origin");
-    if (origin && origin !== request.nextUrl.origin) return new NextResponse("Origin not allowed", { status: 403 });
+    // TLS terminates at Render's proxy, so nextUrl may be an internal HTTP URL.
+    // Trust a configured public URL, never client-supplied forwarded headers.
+    const publicUrl = process.env.APP_URL || process.env.RENDER_EXTERNAL_URL;
+    let expectedOrigin = request.nextUrl.origin;
+    if (publicUrl) {
+      try { expectedOrigin = new URL(publicUrl).origin; }
+      catch { return NextResponse.json({ error: "Invalid public URL configuration" }, { status: 503 }); }
+    }
+    if (origin && origin !== expectedOrigin) return NextResponse.json({ error: "Origin not allowed" }, { status: 403 });
   }
   return NextResponse.next();
 }

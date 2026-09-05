@@ -12,9 +12,7 @@ import { repository } from "@/lib/store";
 export const runtime = "nodejs";
 export async function GET() {
   const run = repository.latest();
-  return Response.json(run ?? { message: "No run yet" }, {
-    status: run ? 200 : 404,
-  });
+  return Response.json(run);
 }
 export async function POST(request: Request) {
   const parsed = createRunSchema.safeParse(
